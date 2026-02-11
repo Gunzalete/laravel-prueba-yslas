@@ -33,6 +33,25 @@ Si es la primera vez, el contenedor crea la base SQLite y corre migraciones auto
 - `per_page` = 1..50
 - `include_comments` = true|false|1|0
 
+### Reglas de negocio
+
+- Un post publicado no puede volver a estado `draft`. Intentarlo devuelve un 422 con un mensaje de negocio.
+- La regla de título único se aplica solo a los posts que están `published` y solo para el mismo día de creación: no impide que existan borradores con el mismo título.
+- Al publicar un post, el campo `published_at` se establece automáticamente si no se provee; 
+- No se pueden crear comentarios en posts que no estén `published`; intentar hacerlo devuelve un 422 con detalle en `errors`.
+- Existe un límite configurable de comentarios por post (`config('posts.max_comments_per_post', 10)` por defecto). Si se alcanza, la API devuelve un 422 con el motivo.
+
+Formato de errores de negocio (HTTP 422) — ejemplo resumido:
+
+```json
+{
+	"message": "Descripción breve del fallo de negocio",
+	"errors": {
+		"campo": ["Mensaje específico"]
+	}
+}
+```
+
 ### Probar con Postman
 
 1) Crear una coleccion nueva.
