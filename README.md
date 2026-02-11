@@ -142,3 +142,11 @@ Respuesta de error 422 (ejemplo):
 
 - `php artisan test`
 
+## Que mejoraría con más tiempo
+
+- Documentación OpenAPI/Swagger.
+- Autenticación y autorización (Laravel Sanctum/Passport), roles y policies para proteger endpoints.
+- Más tests: unitarios, integración y E2E.
+- Cache (Redis) para listados y conteos; optimización de consultas e índices en DB.
+- Límite de comentarios configurable con tests y mensajes claros.
+- Versionado de API y pruebas de contrato para evitar rupturas.
